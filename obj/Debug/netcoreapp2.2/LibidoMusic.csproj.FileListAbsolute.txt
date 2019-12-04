@@ -1,0 +1,16 @@
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\LibidoMusic.deps.json
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\LibidoMusic.runtimeconfig.json
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\LibidoMusic.runtimeconfig.dev.json
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\LibidoMusic.dll
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\LibidoMusic.pdb
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\obj\Debug\netcoreapp2.2\LibidoMusic.csprojAssemblyReference.cache
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\obj\Debug\netcoreapp2.2\LibidoMusic.RazorAssemblyInfo.cache
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\obj\Debug\netcoreapp2.2\LibidoMusic.RazorAssemblyInfo.cs
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\obj\Debug\netcoreapp2.2\LibidoMusic.AssemblyInfoInputs.cache
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\obj\Debug\netcoreapp2.2\LibidoMusic.AssemblyInfo.cs
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\obj\Debug\netcoreapp2.2\LibidoMusic.RazorTargetAssemblyInfo.cache
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\obj\Debug\netcoreapp2.2\LibidoMusic.dll
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\obj\Debug\netcoreapp2.2\LibidoMusic.pdb
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
