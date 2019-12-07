@@ -14,10 +14,12 @@ namespace LibidoMusic.Negocios
 {
     public class Token
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
-        public Token(IConfiguration configuration)
+        public Token(IConfiguration configuration, UserManager<ApplicationUser> userManager)
         {
             _configuration = configuration;
+            _userManager = userManager;
         }
         public UserToken BuildToken(UserInfo userInfo, Task<IList<string>> role)
         {
@@ -42,11 +44,14 @@ namespace LibidoMusic.Negocios
                 expires: expiration,
                 signingCredentials: creds);
 
+            var user = _userManager.FindByNameAsync(userInfo.Email);
+
             return new UserToken()
             {
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 UserName = userInfo.Email,
                 Expiration = expiration,
+                User_Id = user.Id,
                 Role = role.Result.FirstOrDefault()
             };
         }

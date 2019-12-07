@@ -17,7 +17,6 @@ namespace LibidoMusic.Controllers
 {
     [Route("api")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ServiciosController : ControllerBase
     {
         private readonly ServiciosBL serviciosBL;
@@ -29,7 +28,6 @@ namespace LibidoMusic.Controllers
         }
         // GET: api/Servicios
         [HttpGet("servicios")]
-        [Authorize(Roles = "Usuario,Socio")]
         public ActionResult<IList<ServicioDto>> GetServicios()
         {
             return Ok(new { data = serviciosBL.Servicios() });
