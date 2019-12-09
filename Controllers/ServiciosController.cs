@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using LibidoMusic.Contexts;
@@ -12,10 +13,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace LibidoMusic.Controllers
 {
     [Route("api")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class ServiciosController : ControllerBase
     {
@@ -34,18 +37,24 @@ namespace LibidoMusic.Controllers
         }
 
         [HttpGet("serviciossocios/{servicioId}")]
-        [Authorize(Roles = "Usuario,Socio")]
         public ActionResult<IList<ServicioSocioDto>> GetServiciosSociosByIdServicio(int servicioId)
         {
             return Ok(new { data = serviciosBL.ServiciosSocios(servicioId) });
         }
 
         [HttpPost("serviciosocio")]
-        [Authorize(Roles = "Socio")]
-        public ActionResult<ServicioSocioDto> CrearServicioSocio([FromQuery] ServicioSocioDto servicioSocioDto)
+        public ActionResult<ServicioSocioDto> CrearServicioSocio([FromBody] ServicioSocioDto servicioSocioDto)
         {
-            string userName = HttpContext.User.Identity.Name.ToString();
+            string userName = HttpContext.User.Identity.Name;
             return Ok(new { data = serviciosBL.CrearServicioSocio(servicioSocioDto, userName) });
         }
+
+        [HttpGet("serviciossocios/misservicios")]
+        public ActionResult<IList<ServicioSocioDto>> GetMisServicios()
+        {
+            string userName = HttpContext.User.Identity.Name;
+            return Ok(new { data = serviciosBL.MisServicios(userName) });
+        }
+
     }
 }

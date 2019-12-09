@@ -64,9 +64,9 @@ namespace LibidoMusic.Controllers
             userInfo.Role = "Socio";
             var user = new ApplicationUser { UserName = userInfo.Email, Email = userInfo.Email };
             var result = await _userManager.CreateAsync(user, userInfo.Password);
-            await _userManager.AddToRoleAsync(user, userInfo.Role);
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user, userInfo.Role);
                 var role = _userManager.GetRolesAsync(user);
                 return Ok(new { data = _token.BuildToken(userInfo, role) });
             }

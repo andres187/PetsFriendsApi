@@ -28,6 +28,7 @@ namespace LibidoMusic.Negocios
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.UniqueName, userInfo.Email),
+                new Claim("username", userInfo.Email),
                 new Claim(_options.ClaimsIdentity.RoleClaimType, role.Result.FirstOrDefault()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };

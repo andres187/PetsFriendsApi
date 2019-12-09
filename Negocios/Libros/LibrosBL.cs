@@ -15,7 +15,6 @@ namespace LibidoMusic.Negocios
         }
         public List<AutorDto> Libros()
         {
-            var prueba = "pru";
             return _context.Autores.Include(x => x.Books)
                 .Select(x =>
                 new AutorDto

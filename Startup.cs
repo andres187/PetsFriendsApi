@@ -18,6 +18,7 @@ namespace LibidoMusic
 {
     public class Startup
     {
+        private readonly string allowSpecificOrigins = "_allowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,10 +29,11 @@ namespace LibidoMusic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-            services.AddScoped<Token>();
-            services.AddScoped<LibrosBL>();
-            services.AddScoped<ServiciosBL>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(allowSpecificOrigins, builder => { builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod().AllowCredentials(); });
+            });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
 
@@ -40,10 +42,16 @@ namespace LibidoMusic
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = false,
@@ -51,9 +59,14 @@ namespace LibidoMusic
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(Configuration["JWT:key"])),
+                            Encoding.UTF8.GetBytes(Configuration["JWT:key"])),
                     ClockSkew = TimeSpan.Zero
-                });
+                };
+            });
+
+            services.AddScoped<Token>();
+            services.AddScoped<LibrosBL>();
+            services.AddScoped<ServiciosBL>();
 
             services.AddSwaggerGen(config =>
             {
@@ -64,6 +77,7 @@ namespace LibidoMusic
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors(allowSpecificOrigins);
             app.UseSwagger();
 
             app.UseSwaggerUI(config =>
@@ -81,10 +95,9 @@ namespace LibidoMusic
                 app.UseHsts();
             }
 
-            app.UseAuthentication();
-            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

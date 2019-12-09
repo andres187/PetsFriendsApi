@@ -14,3 +14,4 @@ C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\obj\Debug\netcoreapp2.2\Lib
 C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\appsettings.Development.json
 C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\appsettings.json
 C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\Andres\source\repos\LibidoMusic\LibidoMusic\bin\Debug\netcoreapp2.2\web.config

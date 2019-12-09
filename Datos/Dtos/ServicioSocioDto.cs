@@ -11,7 +11,7 @@ namespace LibidoMusic.Datos
         public string Titulo { get; set; }
         public int ServicioId { get; set; }
         public string NombreServicio { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string UserName { get; set; }
     }
 }

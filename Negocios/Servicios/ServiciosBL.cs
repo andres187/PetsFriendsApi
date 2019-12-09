@@ -38,9 +38,28 @@ namespace LibidoMusic.Negocios
                     ServicioId = x.Servicio.Id,
                     NombreServicio = x.Servicio.Titulo,
                     Titulo = x.Titulo,
-                    UserId = x.Id,
+                    UserId = x.User.Id,
                     UserName = x.User.UserName
                 }).Where(y => y.ServicioId == servicioId).ToList();
+
+            return resuesta;
+        }
+
+        public List<ServicioSocioDto> MisServicios(string userName)
+        {
+            var user = _userManager.FindByNameAsync(userName).GetAwaiter().GetResult();
+
+            var resuesta = _context.ServiciosSocios
+                .Select(x =>
+                new ServicioSocioDto
+                {
+                    Id = x.Id,
+                    ServicioId = x.Servicio.Id,
+                    NombreServicio = x.Servicio.Titulo,
+                    Titulo = x.Titulo,
+                    UserId = x.User.Id,
+                    UserName = x.User.UserName
+                }).Where(y => y.UserId == user.Id).ToList();
 
             return resuesta;
         }
